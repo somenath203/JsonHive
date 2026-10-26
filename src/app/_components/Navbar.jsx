@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import { Braces, LogOut } from 'lucide-react';
-import Link from 'next/link';
-import { SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton } from '@clerk/nextjs';
-import { usePathname, useRouter } from 'next/navigation';
+import { Braces, LogOut } from "lucide-react";
+import Link from "next/link";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+} from "@clerk/nextjs";
+import { usePathname, useRouter } from "next/navigation";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 
 const Navbar = () => {
@@ -15,11 +21,20 @@ const Navbar = () => {
   const pathName = usePathname();
 
   const handleLogoutUser = () => {
-    router.push('/');
+
+    router.push("/");
+
+  };
+
+
+  if (pathName.startsWith("/view-particular-jsondata/") || pathName.startsWith("/sign-in") || pathName.startsWith("/sign-up")) {
+
+    return null;
+
   }
 
   return (
-    pathName.startsWith('/view-particular-jsondata/') ? <></> : <div className="sticky top-0 z-30 border-b border-slate-200 bg-white px-4 sm:px-6">
+    <div className="sticky top-0 z-30 border-b border-slate-200 bg-white px-4 sm:px-6">
 
       <div className="flex flex-col lg:flex-row gap-4 lg:gap-0 items-center lg:justify-between mx-auto max-w-4xl py-5">
 
@@ -29,7 +44,9 @@ const Navbar = () => {
 
             <Braces className="size-6 lg:size-7 text-emerald-600" />
 
-            <span className="font-semibold text-lg lg:text-xl tracking-wide text-slate-900">JsonHive</span>
+            <span className="font-semibold text-lg lg:text-xl tracking-wide text-slate-900">
+              JsonHive
+            </span>
 
           </Link>
 
@@ -48,17 +65,20 @@ const Navbar = () => {
 
         <SignedOut>
 
-          <div className='flex items-center gap-2'>
+          <div className="flex items-center gap-2">
 
-            <SignInButton mode='modal'>
+            <SignInButton mode="modal">
 
-              <Button variant='outline' className="border-slate-200 text-slate-700 hover:bg-slate-50">
+              <Button
+                variant="outline"
+                className="border-slate-200 text-slate-700 hover:bg-slate-50"
+              >
                 Sign in
               </Button>
 
             </SignInButton>
 
-            <SignUpButton mode='modal'>
+            <SignUpButton mode="modal">
 
               <Button className="bg-emerald-600 hover:bg-emerald-700 text-white">
                 Sign up
@@ -72,10 +92,10 @@ const Navbar = () => {
 
         <SignedIn>
 
-          <SignOutButton redirectUrl='/'>
+          <SignOutButton redirectUrl="/">
 
             <LogOut
-              className='size-5 cursor-pointer text-slate-500 hover:text-slate-900 transition-colors'
+              className="size-5 cursor-pointer text-slate-500 hover:text-slate-900 transition-colors"
               onClick={handleLogoutUser}
             />
 
@@ -86,7 +106,10 @@ const Navbar = () => {
       </div>
 
     </div>
+
   );
+
 };
+
 
 export default Navbar;

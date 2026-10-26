@@ -1,7 +1,7 @@
 "use client";
 
 import { Share2 } from "lucide-react";
-import { LoaderCircle, Trash, Clipboard, FileJson } from "lucide-react";
+import { LoaderCircle, Trash, Clipboard, FileJson, Eye } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -74,7 +74,10 @@ const JsonHistoryTable = ({
                   Name
                 </TableHead>
                 <TableHead className="text-center text-slate-500 font-medium">
-                  Share
+                  View JSON
+                </TableHead>
+                <TableHead className="text-center text-slate-500 font-medium">
+                  Share JSON
                 </TableHead>
                 <TableHead className="text-center text-slate-500 font-medium">
                   Action
@@ -90,6 +93,14 @@ const JsonHistoryTable = ({
                 >
                   <TableCell className="text-left font-medium text-slate-800">
                     {data.name}
+                  </TableCell>
+
+                  <TableCell>
+                    <div className="flex items-center justify-center">
+                      <Link href={`${process.env.NEXT_PUBLIC_WEBSITE_BASE_URL}/view-particular-jsondata/${data.id}`}>
+                        <Eye className="size-4" />
+                      </Link>
+                    </div>
                   </TableCell>
 
                   <TableCell>
